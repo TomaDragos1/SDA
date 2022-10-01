@@ -1,0 +1,51 @@
+Toma Mihai Dragos - 312CB
+
+Initial mi-am creat structurile care mi s-au cerut in cerinta
+Implementarile pentru list si cozi cu liste le-am luat din curs (efectiv erau acolo definite)
+
+am facut un vector de frecventa in care tin id-urile (alocat dinamic si apelat unde e cazul)
+1 Add_task
+
+M-ai intai mi-am alocat un task dinamic si le-am citit cu un strtok
+fac un for pt a face taskurile conform numarului de taskuri
+apelez functia sort_coada_wait care are rolul sa sorteze in timp ce inserez
+am un while care parseaza lista si 3 if uri corespunzatoare pt conditiile mele
+(mai intai sortez dupa prioritare, exec time si dupa ID) intr-o lista auxiliara
+dupa ce fac asta doar interschimb coada mea cu cea de aux si o distrug pe aux
+peste tot folosesc cozi si stive auxiliare
+
+2.get_task
+o apelez cu toate cozile mele si cu id cautat
+fac efectiv 3 whilerui care cauta prin fiecare coada in ordinea dorita
+dau retrun dupa ce gasesc primul element de acest timp
+fac concaternari ca sa imi reface lista initiala dupa ce o folosesc pe cea auxiliara
+astfel imi pastrez lista initilala si aux devine la final goala
+la sfarsit, daca nu dau return , dau printf la idle (ca nu exista)
+
+3.get_thread
+aici imi dau ca parametru coada run si stiva
+mai intai caut in stiva cu ajutorul unei stive auxiliare
+la sfarsit, rastorn ce e in stiva auxiliara in stiva initilala si dau printf daca ama gasit
+dupa fac acelasi procedeu si pentru coada numai ca la sfarsit fac cu concat
+
+4.Printurile
+
+am facut o functie de parsare in care iterez prin coada
+am apelat alta functie care printeaza in functie de ce vreau eu
+in main sunt trei apelari corespunzatoare cerintei mele fiecare cu functia ei de printare
+
+5. Run
+in acest task am apelat toate cozile si stiva si vectorul in care imi tin id-ruile
+mai intai am facut un while in care sccot din coada din waiting si bag in coada de run si asignez un thread
+dupa scot din run si bag in finish cu al while(aici bag id threadului inapoi in stiva pt a fi refolosit in viitor)
+ultimul while are rolul sa aduca noile taskuri in coada de run pt a fi rulate urmatoarea iterartie
+aici am calculat si timpu total pt toate programele .
+Am vazut ca daca sunt la ultima iteratie si de exemplu am doua taskuri de 300 si eu dau run 500 timpul creste cu 300
+asa ca am facut maximul din coada in acest caz cu functia max_run
+
+6. finish
+am copiat functia de run de mai sus numai ca timpul de rulat al fiecarei iterartie de cuanta l-am facut astfel:
+am facut maximul de timpuri din run si l-am comparat cu Q
+daca era mai mare facea un run de Q
+daca nu face run de maximul
+in rest e exact la fel ca la run numai ca calculez timpul de rulat diferit

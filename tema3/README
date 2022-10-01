@@ -1,0 +1,75 @@
+Toma Mihai Dragos - 312CB
+
+
+la inceput am facut doua structuri de directoare root ca in cerinta si crt_dir sa tin minte unde
+sunt in momentul actual
+
+Task 1 : touch 
+    La acest task mi-am facut doua functii : aloc_file si insert_file
+    Prima imi aloca o structura dinamic de tipul file si cea de a doua imi insereaza
+    in aroborele binar de cautare
+    Pe cea de a doua ma luat-o din laborator, si este efectiv un if daca structura e nula, daca nu e fac unu
+    while pana gasesc elementul si dau break unde il gasesc (am facut si cazul in care exista deja)
+    Dupa break verific daca bag in stanga sau in drepata si inserez elementul alocat
+
+Task 2: mkdir
+    Este exact ca la touch numai ca la alocare mai sunt cateva campuri in plus
+    Cele doua functii sunt aloc_dir si insert_director
+
+La cele doua de mai sus am facut in main cate o functie care are rolul sa caut daca exista 
+deja un file/director cu acelasi nume in dir/file curent
+
+Task 3: ls
+    Aici am facut doua functii de afisare in inordine afisare_fisier si afisare_dir
+    care afiseaza arborele corespunzator in inordine
+
+Task 4: rm
+    am numit functia delete_file
+    Mai intai in main am cautat daca exista deja directorul asta
+    Daca nu am facut functia de stergere din curs
+    Am cautat recrusiv in stanga si drepata si dupa, daca gasesc elemetnul, vad care este ordinul sau
+    Daca nu are copii sterg efectiv nodul
+    Daca are un copil(st sau dr) sar peste el in arbore(unesc parintele cu copilul sau) si il sterg
+    Pentru 2 copii am luat din curs si e putin mai complicat:
+    Mai intai m-am facut un temp cu care sa parcurg
+    M-am dus in stanga nodului si ma verificat dupa sa vad ce in dreapta
+    Daca in dreapta e null sunt in cazul particular din curs , asa ca imi salvez stanga lui temp in temp 2
+    Dupa copiez ce e in nodul acesta in crt_dir si dupa refac legatura in crt_dir si stanga nodului pe care l-am sters(temp2)
+    Am vazut ca asa se face pe desenul din curs
+    Cazul in care temp->dir != NULL:
+        Attunci ma duc maxim in dreapta (pana acesta e dif de null)
+        Varoiabila de tip Tarbfile parinte are rolul sa tina minte parintele ultimului element din dr
+        dupa in temp2 salvez subarborele stanga din temp pentru a nu-l pierde
+        dupa iara copiez in crt_dir ce este in temp(adica elem maxim dr) si dupa il sterg
+        la final refac legatura dintre aroberele curent si stanga lui temp(temp2)pt a nu pierde acest subarbore
+
+Task5 : rmdir
+        Acest taks este exact ca rm numai ca mai apar doua functii de elibreare:
+            eliberare_file si eliberare_dir
+            Prima imi elibereaza recursiv un arbore de file si cea de a doua imi
+            elibereaza recurrsiv un arobore de directoare dar si toate subdirectoarele lui si fileurile din el
+            Acestea doua sunt niste functii recursive, aproximativ la fel, numai ca la dir apelez si dir->subdir pt a distruge tot
+
+Task6: cd
+            Aici am 2 functii pe care le folosesc:
+                cautare_dir_cd si cd_dir
+            Prima imi caut prin arborele curent de dir sa vad daca exista directorul meu, si daca da il intorc in cd_dir
+            In cd_dir am doua cazuri:
+                    .. si verific daca dau cd .. in root(atunci nu se intampla nimic) si daca nu e root ma duc in parrinte
+                    cd name_dir unde aperelz fucntia cde cautare_dir_cd si vad daca mi-a gasit ceva
+                    Daca da intorc in main si egalez crt_dir = dir_intors
+                    Daca nu afisez ca nu s-a gasit dir meu
+
+Task7: pwd
+    Un task destul de simplu, am apelat recursiv si am dat printf
+
+Task8: find -f/-d
+    find -f:
+            functia caut_file care are rolul sa caute recursiv peste tot, de aceea ii dau root ca parametru
+            m-am folosit de aux pt a intoarce prin el file-ul dorit
+            am apelat efectiv in stanga si in dreapta fucntia si dupa cautam file cu functia de verif_file_exist
+            Daca exista dau return la crt_dir pt a tine minte directorul unde e si aux ma ajut sa il tin minte pana la sfarsitul programului acest lucru
+            Din acesta cauz am folosit aux, pt ca pierdeam directorul pe parcursul cautarii mele recursive
+    find -d:
+        aceasi functie numai ca in loc de verif_file_exist am facut strcmp si in main am facut si cazul in care dau find la root
+  

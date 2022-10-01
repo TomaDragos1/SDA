@@ -1,0 +1,17 @@
+mkdir d1
+ls
+find -d d1
+ls
+mkdir d2
+find -d d2
+mkdir d3
+ls
+find -d d3
+find -d d2
+find -d d1
+cd d1
+mkdir dd1
+cd ..
+find -d dd1
+ls
+quit

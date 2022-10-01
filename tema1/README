@@ -1,0 +1,75 @@
+Toma Dragos 312CB - tema 1 sda
+
+Initial mi-am facut doua strcuturi conform cerintei
+TLetters care este strucutra pentru prima lista din Hash Table(informatiei) si TFrequenci care este strucutra corespunzatoare celei de a doua strucuri de informatie
+in thash de afla corpul functiilor mele din functii-tabHash si in tlg corpul funtiilo din IncLG
+in tema1 este mainul meu, locul principal unde fac functia de inserare in sublista, afisari, conversii, etc.
+iar functii-tabHash este fisierul unde se afla functiile in mare pe care le aplica TH meu initial
+INSERARE:
+
+In fucntia GenerareHash imi aloc TH si fac ciitirea si inserez. Aici imi fac tot hash tabelul
+Citesc din fisier cu ajutorul functiei fgets si dupa cu strtok vad care este cerinta mea
+Functia InsTh:(se aflta in functii-tabHash)
+	Aceasta are rolul sa insereze fiecare element in TH si in sublista corespunzatoare
+	O apelez cu mai multe subprograme care ma ajuta sa fac diferite conversii
+	In functia propriu zisa mai intai imi creez codul pt hashmapul meu(pt coloana corespunzatoare)
+	Dupa, cu ajutorul unui for, verific daca exsita vreun cuvant in lista mea cu informatii de tip TLetters
+	Pe scurt verific numarul de litere al fiecarei celule din ah->v[poz] cu numarul de litere curent al cuvantului meu sa vad daca exista deja in lista
+	(asta face fucntia fcmp, verfica daca doua elemente sunt egale) - in maine se numeste cmp_equal_first
+	Dupa afinsert are rolul sa insereze in sublista(o sa o explic la final pt ca mai complexa)
+Daca gasesc ca elemntul meu se repeta in lista o sa ii dau return 1 pt a stii sa ma opresc
+Daca nu sa sa adaug noua celula de tip TLetters in prima lista din TH cu ajutorul functiei Ins_IncLG
+Ins_IncLG:
+	Asta se afla in IncLG si are rolul sa insereze in lista principala elementele in mod crescator
+	first_list_cmp (cmp_cresc_first in main) are rolul sa compare doua nr de litere din celule sa sa intoarca daca una e mai mica decat cealalta(ma ajuta pt a ordona crescator)
+	aloc1 are rolul sa aloce o celul cu campul de info TLetters dearece scopul fucntiei este sa insereze o noua celula in lista principala(lista orizontala din ex)
+	mai intai il aloc pe aux si dupa fac inserarea din laborator sortata
+afinsert(asa se numeste in functii tab-Hash)
+	in main(unde o construiesc) se numeste insert_second_list dearece insereaza in a doua lista
+	mai intai verfic daca pointerul din celula catre sublista e null(deoarece apelez fucntia asta si cand initializez celula)
+	Daca e null ii aloc celula si o egalez cu info->head-list adica initializez celula din lista princiapala cu prima celula din sublista
+	acesta functie o apelez de doua ori: prima data pentru a insera in sublista in caz ca celule principala care contie TLetters se repeta
+	daca TLettes nu se repeta in prima lista mai apelez odata afinsert pentru a putea pune primul element in head_list(pointer la adresa)
+	acesta trebuie initializat de fiecare data la gasirea unui noua element si din aceasta cauza a aparut if-ul cu NULL	
+	daca nu e null(adica deja are elemente) o sa fac un for si o sa incep sa verific pentru a face a doua inserare sortata
+	functia compare_two_cels_second are rolul sa  verifice doua frecvente dintre doua celule din sublista
+	daca sunt egale cele doua frecventa , fac frecventa++ pt celula existenta in lista si intorc 1
+	daca se mareste frecventa atunci trb sa reinserez celula mea in sublista conform cerintelor probleme(desc dupa frecventa  si cresc lexicografic in caz de egal)
+	am si un anterior in caz ca trb sa ii dau move la prima celula din sublista
+	daca fucntia compare_two_cels_second imi intoarece 0 atunci imi aloc o noua celul cu info de tip TFrequence si o inserez tot cu functia ord_frequence
+ord_frequence:(main)
+	acesta functie primeste ca parametrii adresa la capul sublistei si celula pe care vreau sa o inserez
+	o sa fac un for care itereaza prin toata sublista si o sa tin minte si anteriorul pt a putea insera
+	cu primul if verfici daca valorile frecventelor sunt egale,si daca da atunci verific leixcografic(strcmp)
+	daca nu se indeplineste if-ul atunci fac altul unde verific daca frecventa mea este mai mare decat cea iterata(pt a insera in caz ca nu am cu ce sa fac strcmp)
+	dau break in amandoua si inserez la fel ca la laborator
+cam asta este functia de inserare cu celelalte subprograme
+intorc si coduri de eroare pe intregul intregului program(in caz ca alocarea nu este rusita)
+
+AFISARE:
+
+	primul caz de afisare:(AfiTH - functii-tabHash)
+	print care imi va afisa tot TH
+	functia corespunzatoare este AfiTH care va fi in functii-TabHash
+	afisare_cel_number_letters si afisare_element_second_list au rolul sa faca conversii si sa afiseze (prima este pentru elemetele din lista princiapal si a doua pt elementele din subliste)
+	
+	al doile caz de afisare: print frequence
+	functia corespunzatoare este AfiTH_case1-functii-tabHash
+	programul verif_list are rolul sa verifice intraga lista corespunzatoare liniei din TH
+	fac acesta verificare pentru a vedea daca in lista mea sa afla frecventa dorita(daca nu sar efectiv peste ea)
+	verif_cel o apelez la ficeare iteratie prin lista principala
+	aceasta verifica daca sublista corespunzatoare are frecventele dorite sau nu (daca nu sar efectiv peste ea)
+	Am facut aceste functii de verificare derece trb sa am o punctuatie anume in afisare si trb facut o verificare inainte
+	funcita afisare_first_task face doare afisarea elemtelor dorite
+	
+	al treilea caz de afisare:print letter lenght
+	functia corespunzatoare este AfiTH_case2-functii-tabHash
+	aici este mai usor dearece ma duc direct la linia dorita prin folosirea codului hash
+	mai am o functie de verificare pentru lista prinipala pentru a vedea daca lungimea exista sau nu (verif_case_2)
+	afisare_case_2 afiseaza elemntele din sublista pe care le vreau
+	
+DISTRUGERE:
+	functia corespunzatoare este DistrTH (functii-tabHash)
+	se afla in functii-TABHash si are rolul sa dezaloce
+	fucntia eliberare_second_list dezaloca elementele din sublista
+	in DistrTH efectiv iterez prin toata tabela si eliberez fiecare element
